@@ -124,4 +124,38 @@
         </LinearLayout>
     </LinearLayout>
 
+
+    <RelativeLayout
+        android:id="@+id/msg_winner"
+        android:background="#b6ff0000"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp">
+
+        <TextView
+            android:id="@+id/msg_winner_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="40dp"
+            android:text="Player One is Winner"
+            android:textAlignment="center"
+            android:textColor="#ddd"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/msg_winner_btn"
+            android:onClick="reset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
+            android:text="Playe Again?" />
+
+
+    </RelativeLayout>
+
 </RelativeLayout>

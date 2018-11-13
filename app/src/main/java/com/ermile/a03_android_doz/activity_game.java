@@ -1,13 +1,16 @@
 package com.ermile.a03_android_doz;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class activity_game extends AppCompatActivity {
@@ -31,10 +34,16 @@ public class activity_game extends AppCompatActivity {
             {0,4,8},{2,4,6}
         };
 
+    RelativeLayout msg_winner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        // masege for win
+        msg_winner = findViewById ( R.id.msg_winner );
+        msg_winner.setVisibility ( View.GONE );
         // menu back
         if (getSupportActionBar() !=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -60,16 +69,29 @@ public class activity_game extends AppCompatActivity {
             status[tag] = PLAYER_TWO;
             trun_player=PLAYER_ONE;
         }
-        
+
         //check winer
+        winer_msg();
+    }
+
+    private void winer_msg() {
         winer = chek_wener ();
         if (winer !=NO_WINER || game_over ()){
-            String winner_name = (winer ==PLAYER_ONE)? "ONE" :
-                    (winer == PLAYER_TWO) ? "TWO" : "NO Winner";
-            Toast.makeText ( this , "Winner :" + winner_name , Toast.LENGTH_LONG ).show ( );
+            String msg = "";
+            int color = Color.GREEN;
+            if (winer == PLAYER_ONE){
+                msg = "ONE WIN";
+                color = Color.RED;
+            }else if (winer == PLAYER_TWO){
+                msg = "TWO WIN";
+                color = Color.YELLOW;
+            }else if (winer == NO_WINER){
+                msg="NO WIN";
+            }
+            msg_winner.setBackgroundColor ( color );
+            ((TextView) msg_winner.findViewById(R.id.msg_winner_txt)).setText ( msg );
+            msg_winner.setVisibility ( View.VISIBLE );
         }
-        
-        
     }
 
 
@@ -101,7 +123,7 @@ public class activity_game extends AppCompatActivity {
 
 
     // Restart
-    public void reset(){
+    public void reset(View v){
         // trun_player
         trun_player= PLAYER_ONE;
         // winner
@@ -124,6 +146,8 @@ public class activity_game extends AppCompatActivity {
             }
         }
 
+        msg_winner.setVisibility ( View.GONE );
+
     }
 
     // menu reset
@@ -136,7 +160,7 @@ public class activity_game extends AppCompatActivity {
                 public boolean onMenuItemClick(MenuItem item) {
                     LinearLayout rel = findViewById ( R.id.fader_xml );
                     rel.animate ().rotationBy ( 360f ).setDuration ( 500 );
-                    reset ();
+                    reset (null);
                     return false;
                 }
             } );
