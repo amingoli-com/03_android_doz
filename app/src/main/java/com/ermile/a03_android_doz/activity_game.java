@@ -60,7 +60,7 @@ public class activity_game extends AppCompatActivity {
         
         //check winer
         winer = chek_wener ();
-        if (winer !=NO_WINER){
+        if (winer !=NO_WINER || game_over ()){
             Toast.makeText ( this , "Winner :" + ((winer == PLAYER_ONE) ? "one": "two") , Toast.LENGTH_LONG ).show ( );
         }
         
@@ -81,6 +81,19 @@ public class activity_game extends AppCompatActivity {
         return NO_WINER;
 
     }
+
+
+    // no winner and full home
+    public boolean game_over(){
+        for (int i = 0; i <status.length; i++){
+            if (status[i] == NOT_PLAYED){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
