@@ -8,6 +8,17 @@ import android.widget.ImageView;
 
 public class activity_game extends AppCompatActivity {
 
+    public static final int PLAYER_ONE = 0;
+    public static final int PLAYER_TWO = 1;
+    public static final int NOT_PLAYED = 2;
+
+    int[] status = {NOT_PLAYED,NOT_PLAYED,NOT_PLAYED,
+                    NOT_PLAYED,NOT_PLAYED,NOT_PLAYED,
+                    NOT_PLAYED,NOT_PLAYED,NOT_PLAYED};
+
+    int trun_player= PLAYER_ONE;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +30,26 @@ public class activity_game extends AppCompatActivity {
 
     }
 
+    public void onclick(View view){
+        ImageView img = (ImageView) view;
+
+        int tag = Integer.parseInt ( (String)  view.getTag () );
+
+        if (status[tag] !=NOT_PLAYED){
+            return;
+        }
+
+        if (trun_player == PLAYER_ONE){
+            img.setImageResource ( R.drawable.pone );
+            status[tag] = PLAYER_ONE;
+            trun_player=PLAYER_TWO;
+        }else if (trun_player == PLAYER_TWO){
+            img.setImageResource ( R.drawable.ptwo );
+            status[tag] = PLAYER_TWO;
+            trun_player=PLAYER_ONE;
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id=item.getItemId();
@@ -27,10 +58,5 @@ public class activity_game extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void onclick(View view){
-        ImageView img = (ImageView) view;
-        img.setImageResource(R.drawable.pone);
     }
 }
