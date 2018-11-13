@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class activity_game extends AppCompatActivity {
@@ -133,6 +134,8 @@ public class activity_game extends AppCompatActivity {
             menu_reset.setOnMenuItemClickListener ( new MenuItem.OnMenuItemClickListener ( ) {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
+                    LinearLayout rel = findViewById ( R.id.fader_xml );
+                    rel.animate ().rotationBy ( 360f ).setDuration ( 500 );
                     reset ();
                     return false;
                 }
