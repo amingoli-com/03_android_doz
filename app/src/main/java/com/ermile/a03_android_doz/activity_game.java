@@ -2,9 +2,11 @@ package com.ermile.a03_android_doz;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class activity_game extends AppCompatActivity {
@@ -32,7 +34,7 @@ public class activity_game extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
+        // menu back
         if (getSupportActionBar() !=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -95,6 +97,50 @@ public class activity_game extends AppCompatActivity {
     }
 
 
+    // Restart
+    public void reset(){
+        // trun_player
+        trun_player= PLAYER_ONE;
+        // winner
+        winer = NO_WINER;
+        // status
+        for (int i = 0; i < status.length; i++){
+            status[i] =NOT_PLAYED;
+        }
+        // find image view > linear fader in > xml
+        LinearLayout fader_xml= findViewById ( R.id.fader_xml );
+        for (int i = 0 ; i < fader_xml.getChildCount (); i++){
+            LinearLayout row = (fader_xml.getChildAt ( i ) instanceof LinearLayout) ?
+                    (LinearLayout) fader_xml.getChildAt ( i ) : null;
+            if (row == null) return;
+            for (int j = 0; j< row.getChildCount (); j++){
+                ImageView iv = (row.getChildAt ( j ) instanceof ImageView) ?
+                        (ImageView) row.getChildAt ( j ) : null;
+                if (iv == null) return;
+                iv.setImageResource ( 0 );
+            }
+        }
+
+    }
+
+    // menu reset
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            MenuItem menu_reset = menu.add ( "RESET" );
+            menu_reset.setShowAsAction ( MenuItem.SHOW_AS_ACTION_ALWAYS );
+            menu_reset.setOnMenuItemClickListener ( new MenuItem.OnMenuItemClickListener ( ) {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    reset ();
+                    return false;
+                }
+            } );
+            return super.onCreateOptionsMenu ( menu );
+        }
+
+
+
+ // menu back
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id=item.getItemId();
