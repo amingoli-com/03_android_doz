@@ -63,7 +63,9 @@ public class activity_game extends AppCompatActivity {
         //check winer
         winer = chek_wener ();
         if (winer !=NO_WINER || game_over ()){
-            Toast.makeText ( this , "Winner :" + ((winer == PLAYER_ONE) ? "one": "two") , Toast.LENGTH_LONG ).show ( );
+            String winner_name = (winer ==PLAYER_ONE)? "ONE" :
+                    (winer == PLAYER_TWO) ? "TWO" : "NO Winner";
+            Toast.makeText ( this , "Winner :" + winner_name , Toast.LENGTH_LONG ).show ( );
         }
         
         
